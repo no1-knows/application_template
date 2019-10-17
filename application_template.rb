@@ -11,20 +11,11 @@ puts txt
 
 
 
-
-
 #Gemfileに追加
 #group :development, :test do
-
 #  # テストデータ
 #  gem 'factory_bot_rails'
-
 #end
-
-#bootstrap form
-#postgresql
-#
-
 
 #--------------------------------------------
 # PostgreSQL設定　（RubyMineでposgreでアプリ作成→postgresでサーバー起動）
@@ -32,8 +23,7 @@ puts txt
 #after_bundle do
 #  run "export PGDATA='/usr/local/var/postgres'"
 #end
-
-
+# ユーザーを作成
 #rails_user
 
 
@@ -56,34 +46,34 @@ puts txt
 @template_path = File.dirname(__FILE__) + '/application_templates'
 
 #
-#apply "#{@template_path}/i18n.rb"
+apply "#{@template_path}/i18n.rb"
 #
 #apply "#{@template_path}/bullet.rb"
 #
-#apply "#{@template_path}/bootstrap_jquery.rb"
-#
-#apply "#{@template_path}/simpleform_clientsidevalidation.rb"
-#
-#apply "#{@template_path}/rspec.rb"
+apply "#{@template_path}/bootstrap_jquery.rb"
+
+apply "#{@template_path}/simpleform_clientsidevalidation.rb"
+
+apply "#{@template_path}/rspec.rb"
 
 
 
 #--------------------------------------------
 # サンプルデータの投入
 #--------------------------------------------
-after_bundle do
-  generate(:scaffold, "sample name:string age:integer")
-  route "root to: 'samples#index'"
-  
-  
-  
-  rails_command "db:create"
-  rails_command "db:migrate"
-
-  inject_into_file "app/models/sample.rb", after: "class Sample < ApplicationRecord" do 
-    "\n validates :name, presence: true"
-  end
-end
+# after_bundle do
+#   generate(:scaffold, "sample name:string age:integer")
+#   route "root to: 'samples#index'"
+#
+#
+#
+#   rails_command "db:create"
+#   rails_command "db:migrate"
+#
+#   inject_into_file "app/models/sample.rb", after: "class Sample < ApplicationRecord" do
+#     "\n validates :name, presence: true"
+#   end
+# end
 #
 #
 #
