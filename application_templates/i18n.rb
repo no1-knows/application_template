@@ -1,5 +1,10 @@
 #--------------------------------------------
 # ロケール対応
+#
+# simple_formは独自の記載方法があるので公式を確認
+#
+# 参考：http://alfa.hatenablog.jp/entry/2013/12/03/221308
+#
 #--------------------------------------------
 gem 'rails-i18n'
 run 'bundle install'
@@ -26,23 +31,38 @@ ja:
       sample_copy: *sample                # => 'ユーザ情報' となる。
       site_name: '翻訳したサイト名'
  
-  # モデルは全て activerecord を起点にする。
-  # これにより、User.model_name.human / User.human_attribute_name({attr_name})でアクセス可能。
-  activerecord:
-    models:
-      sample: 'サンプル情報'
-    attributes:
+  # simpleformの書き方
+  simple_form:
+    labels:
       sample:
         name: '名前'
         age: '年齢'
-    errors:
-      nanikano_model_error: 'モデルで何かのエラー'  # 特定のモデルに属さないエラーはこの階層に書く。
-      models:
-        sample:
-          blank: 'urlかmailが空白です。' # モデル内で使いまわすエラーはこの階層に書く。
-          attributes:
-            name:
-              blank: '名前が空白です。'  # errosの中に同じ定義がある場合、ネストが深いほうが優先順位が高い
+    hints:
+      sample:
+        name: 'なまえを入力してください'
+        age: '半角数字のみ使えます'
+    placeholders:
+      sample:
+        name: 'なまえ'
+        age: '****'
+
+  # モデルは全て activerecord を起点にする。
+  # これにより、User.model_name.human / User.human_attribute_name({attr_name})でアクセス可能。
+#  activerecord:
+#    models:
+#      sample: 'サンプル情報'
+#    attributes:
+#      sample:
+#        name: '名前'
+#        age: '年齢'
+#    errors:
+#      nanikano_model_error: 'モデルで何かのエラー'  # 特定のモデルに属さないエラーはこの階層に書く。
+#      models:
+#        sample:
+#          blank: 'urlかmailが空白です。' # モデル内で使いまわすエラーはこの階層に書く。
+#          attributes:
+#            name:
+#              blank: '名前が空白です。'  # errosの中に同じ定義がある場合、ネストが深いほうが優先順位が高い
   
   # 全モデルで共通のアトリビュートはattributesを起点にattribute名を直下に記述する。
   # validation errorやhuman_attribute_nameで取得できる。
